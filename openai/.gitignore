@@ -1,5 +1,4 @@
 # Binaries for programs and plugins
-.idea/
 *.exe
 *.exe~
 *.dll
@@ -14,3 +13,7 @@
 
 # Dependency directories (remove the comment below to include it)
 # vendor/
+
+# Auth token for tests
+.openai-token
+.idea
