@@ -71,7 +71,8 @@ func main() {
 	groupWs.GET("chat", api.WsChat)
 
 	logger.LogInfo("chatGPT query service start")
-	err = r.Run(fmt.Sprintf(":%d", config.Port))
+	//err = r.Run(fmt.Sprintf(":%d", config.Port))
+	err = r.RunTLS(fmt.Sprintf(":%d", config.Port), "server.crt", "server.key")
 	if err != nil {
 		err = fmt.Errorf("run service error: %s", err.Error())
 		logger.LogPanic(err.Error())
