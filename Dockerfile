@@ -26,11 +26,14 @@ RUN apk add tzdata && cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && ech
 RUN apk add ca-certificates
 
 # 指定运行时的工作目录
-WORKDIR /app
+#WORKDIR /app
 
 # 将构建产物/app/main拷贝到运行时的工作目录中
 COPY --from=builder /app/main  /app/
 COPY --from=builder /app/config.yaml  /app/
+COPY --from=builder /app/server.crt  /app/
+COPY --from=builder /app/server.csr  /app/
+COPY --from=builder /app/server.key  /app/
 
 RUN chmod +x /app/main
 
