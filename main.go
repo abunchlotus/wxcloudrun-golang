@@ -72,7 +72,7 @@ func main() {
 
 	logger.LogInfo("chatGPT query service start")
 	//err = r.Run(fmt.Sprintf(":%d", config.Port))
-	err = r.RunTLS(fmt.Sprintf(":%d", config.Port), "server.crt", "server.key")
+	err = r.RunTLS(fmt.Sprintf(":%d", config.Port), "wxserver.crt", "wxserver.key")
 	if err != nil {
 		err = fmt.Errorf("run service error: %s", err.Error())
 		logger.LogPanic(err.Error())
