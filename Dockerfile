@@ -38,6 +38,7 @@ COPY --from=builder /app/wxserver.key  /app/
 RUN chmod +x /app/main
 
 RUN ls -lth /app
+EXPOSE 9000
 
 # 执行启动命令
 # 写多行独立的CMD命令是错误写法！只有最后一行CMD命令会被执行，之前的都会被忽略，导致业务报错。
