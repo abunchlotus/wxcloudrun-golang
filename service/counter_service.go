@@ -1,6 +1,8 @@
 package service
 
 import (
+	"context"
+	"encoding/base64"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
@@ -11,6 +13,8 @@ import (
 	"wxcloudrun-golang/db/model"
 
 	"gorm.io/gorm"
+	openai "github.com/sashabaranov/go-openai"
+	"encoding/base64"
 )
 
 // JsonResult 返回结构
@@ -156,4 +160,32 @@ func getIndex() (string, error) {
 		return "", err
 	}
 	return string(b), nil
+}
+
+
+func GptTest(w http.ResponseWriter, r *http.Request) {
+	fmt.Errorf("i am here!")
+	key := "c2stYUVtM2N2T2J4ajRqZVpyRktXVEZUM0JsYmtGSmZyc3IyV3hYTjdLM0tOVG5rM1Bj"
+	decodedBytes, _ := base64.StdEncoding.DecodeString(key)
+	client := openai.NewClient(string(decodedBytes))
+	resp, err := client.CreateChatCompletion(
+		context.Background(),
+		openai.ChatCompletionRequest{
+			Model: openai.GPT3Dot5Turbo,
+			Messages: []openai.ChatCompletionMessage{
+				{
+					Role:    openai.ChatMessageRoleUser,
+					Content: "给我写一个200字的作文，题材不限",
+				},
+			},
+		},
+	)
+	fmt.Errorf(resp.Choices[0].Message.Content)
+
+	if err != nil {
+		fmt.Errorf("ChatCompletion error: %v\n", err)
+		return
+	}
+
+	fmt.Errorf(resp.Choices[0].Message.Content)
 }
